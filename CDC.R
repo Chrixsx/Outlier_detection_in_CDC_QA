@@ -6,7 +6,10 @@ library(reshape2) # to flip the data frame
 
 dat <- vroom(file = "CDC_example_data.txt", delim= "\t", show_col_types = F)
 
+################# Creating functions #################
+
 # Function 1: to extract data for each CDC level
+# Input: data (data frame) and cdc_level (" ")
 extract_data <- function(data, cdc_level) {
   data %>% filter(`Sample Type` == cdc_level) %>%  select(c('GUANIDINOACETIC', 'GLY', 'ALA', 'VAL', 'ISOLEU_LEU_OHPRO', 'ORN', 
                                                      'MET', 'PHE', 'GLYCYL_PROLINE', 'ARG', 'CITRULLINE', 'TYR',
@@ -17,6 +20,7 @@ extract_data <- function(data, cdc_level) {
 }
 
 # Function 2: to draw plots
+# Input: data (data frame) and cdc_name (" ")
 draw_plot <- function(data, cdc_name) {
   # Convert columns to rows
   data_melted <- melt(data, variable.name = "Variable", value.name = "Value")
@@ -38,7 +42,7 @@ draw_plot <- function(data, cdc_name) {
   
 }
 
-########## Analysis from here ##############
+############## Running code from here ##############
 
 # For CDC-A
 CDC_A <- extract_data(data = dat,
