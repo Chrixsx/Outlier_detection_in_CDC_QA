@@ -4,7 +4,7 @@ library(tidyverse)
 library(ggplot2)
 library(reshape2) # to flip the data frame
 
-dat <- vroom(file = "C:/Users/Chris/OneDrive/Alby_CDC/Data/CDC_Alby.txt", delim= "\t", show_col_types = F)
+dat <- vroom(file = "CDC_example_data.txt", delim= "\t", show_col_types = F)
 
 # Function 1: to extract data for each CDC level
 extract_data <- function(data, cdc_level) {
@@ -38,7 +38,7 @@ draw_plot <- function(data, cdc_name) {
   
 }
 
-
+########## Analysis from here ##############
 
 # For CDC-A
 CDC_A <- extract_data(data = dat,
@@ -68,93 +68,6 @@ CDC_D <- extract_data(data = dat,
 draw_plot(data = CDC_D,
           cdc_name = "CDC-D")
 
-
-# analyte <- c('GUANIDINOACETIC', 'GLY', 'ALA', 'VAL', 'ISOLEU_LEU_OHPRO', 'ORN', 
-#              'MET', 'PHE', 'GLYCYL_PROLINE', 'ARG', 'CITRULLINE', 'TYR',
-#              "FREE CARN" , "C2 CARN", "C3 CARN", "C4 CARN", "C5:1 CARN",
-#              "C5 CARN", "OH C4 CARN", "C6 CARN", "OH C5 CARN", "C8 CARN",
-#              "C3 DC CARN", "C10 CARN", "C5 DC CARN", "C14:1 CARN", "C14 CARN",
-#              "C16 CARN", "OHC16 CARN", "C18 CARN")
-
-############### OLD draft ############
-# dat %>% select(-c(`Sample Type`, `Sample ID`)) %>%  colnames()
-# 
-# # Boxplot function  
-# plot_fuc <- function(df, name_df) {
-#   pdf(file= paste(name_df,".pdf"), width = 12, height = 12)
-#   
-#   
-#   boxplot(df,
-#           horizontal = F,
-#           names = colnames(df),
-#           las =2,
-#           cex.axis = 0.5,
-#           main = name_df,
-#           outpch = 8,
-#           outcol = "red",
-#           outcex = 0.7
-#           )
-#   
-#   dev.off()
-# }
-# 
-# 
-# # Part 1: CDC-A
-# CDC_A_AA <- dat %>% filter(`Sample Type` == "A") %>% select(c(GUANIDINOACETIC, GLY, ALA, VAL, ISOLEU_LEU_OHPRO, 
-#                                                               ORN, MET, PHE, GLYCYL_PROLINE, ARG, CITRULLINE, TYR))
-# CDC_A_CARN <- dat %>% filter(`Sample Type` == "A") %>% select(c("FREE CARN" , "C2 CARN", "C3 CARN", "C4 CARN", "C5:1 CARN",
-#                                                             "C3 DC CARN", "C10 CARN", "C5 DC CARN", "C14:1 CARN", "C14 CARN",
-#                                                                 "C16 CARN", "OHC16 CARN", "C18 CARN"))
-# plot_fuc(CDC_A_AA, "CDC_A_AA")
-# plot_fuc(CDC_A_CARN, "CDC_A_CARN")
-# 
-# 
-# 
-# 
-# # Part 2: CDC-B
-# CDC_B_AA <- dat %>% filter(`Sample Type` == "B") %>% select(c(GUANIDINOACETIC, GLY, ALA, VAL, ISOLEU_LEU_OHPRO, 
-#                                                               ORN, MET, PHE, GLYCYL_PROLINE, ARG, CITRULLINE, TYR))
-# CDC_B_CARN <- dat %>% filter(`Sample Type` == "B") %>% select(c("FREE CARN" , "C2 CARN", "C3 CARN", "C4 CARN", "C5:1 CARN",
-#                                                                "C5 CARN", "OH C4 CARN", "C6 CARN", "OH C5 CARN", "C8 CARN",
-#                                                                "C3 DC CARN", "C10 CARN", "C5 DC CARN", "C14:1 CARN", "C14 CARN",
-#                                                                "C16 CARN", "OHC16 CARN", "C18 CARN"))
-# 
-# plot_fuc(CDC_B_AA, "CDC_B_AA")
-# plot_fuc(CDC_B_CARN, "CDC_B_CARN")
-# 
-# 
-# 
-# 
-# # Part 3: CDC-C 
-# 
-# CDC_C_AA <- dat %>% filter(`Sample Type` == "C") %>% select(c(GUANIDINOACETIC, GLY, ALA, VAL, ISOLEU_LEU_OHPRO, 
-#                                                              ORN, MET, PHE, GLYCYL_PROLINE, ARG, CITRULLINE, TYR))
-# 
-# CDC_C_CARN <- dat %>% filter(`Sample Type` == "C") %>% select(c("FREE CARN" , "C2 CARN", "C3 CARN", "C4 CARN", "C5:1 CARN",
-#                                                                 "C5 CARN", "OH C4 CARN", "C6 CARN", "OH C5 CARN", "C8 CARN",
-#                                                                 "C3 DC CARN", "C10 CARN", "C5 DC CARN", "C14:1 CARN", "C14 CARN",
-#                                                              "C16 CARN", "OHC16 CARN", "C18 CARN"))
-# 
-#  
-# plot_fuc(CDC_C_AA, "CDC_C_AA")
-# plot_fuc(CDC_C_CARN, "CDC_C_CARN")
-# 
-# 
-# 
-# # Part 4: CDC-D
-# 
-# 
-# CDC_D_AA <- dat %>% filter(`Sample Type` == "D") %>% select(c(GUANIDINOACETIC, GLY, ALA, VAL, ISOLEU_LEU_OHPRO, 
-#                                                              ORN, MET, PHE, GLYCYL_PROLINE, ARG, CITRULLINE, TYR))
-# CDC_D_CARN <- dat %>% filter(`Sample Type` == "D") %>% select(c("FREE CARN" , "C2 CARN", "C3 CARN", "C4 CARN", "C5:1 CARN",
-#                                                                "C5 CARN", "OH C4 CARN", "C6 CARN", "OH C5 CARN", "C8 CARN",
-#                                                                "C3 DC CARN", "C10 CARN", "C5 DC CARN", "C14:1 CARN", "C14 CARN",
-#                                                                "C16 CARN", "OHC16 CARN", "C18 CARN"))
-# 
-# 
-# plot_fuc(CDC_D_AA, "CDC_D_AA")
-# plot_fuc(CDC_D_CARN, "CDC_D_CARN")
-# 
 
 
 
